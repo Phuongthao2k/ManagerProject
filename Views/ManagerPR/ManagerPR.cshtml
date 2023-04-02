@@ -1,0 +1,64 @@
+﻿@model IEnumerable<PR>
+@{
+    ViewData["Title"] = "ActionResult";
+}
+<label class="page-name mt-3 ml-3">QUẢN LÝ PR</label>
+<div class="">
+    <form asp-controller="ManagerPR" asp-action="ManagerPR" class="d-flex
+        ml-5 mt-3">
+        <div class="date d-flex ml-5">
+            <label class="mr-2 mt-2">Ngày</label>
+            <input class="date-input form-control" name="createdAt"
+                type="date" placeholder="dd-mm-yyyy" value=""
+                min="1997-01-01" max="2030-12-31">
+        </div>
+
+        <div class="d-flex ml-5">
+            <label class="mr-2 mt-1">Mã PR</label>
+            <input type="text" class="pr-code form-control" name="prCode" />
+        </div>
+        <div class="d-flex ml-5">
+            <label class="mr-2 mt-1 mr-3">Tình trạng</label>
+            <select class="status form-control" id="input-status"
+                name="status">
+                <option value="Chưa duyệt">Chưa duyệt</option>
+                <option value="Đã duyệt">Đã duyệt</option>
+                <option value="Bị hủy">Bị hủy</option>
+            </select>
+        </div>
+        <button class="search btn ml-5" type="submit"><b>Search</b></button>
+    </form>
+</div>
+<div class="mt-3">
+    <form asp-controller="ManagerPR" asp-action="AddPR" method="get">
+        <button class="new btn" type="submit"><b>+ Tạo mới</b></button>
+    </form>
+    <table class="table table-bordered text-center">
+        <thead class="table-colume-name">
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Mã PR</th>
+                <th scope="col">Ngày tạo PR</th>
+                <th scope="col">Mã NV tạo</th>
+                <th scope="col">Ngày cấp hàng</th>
+                <th scope="col">Dự án cần xuất PR</th>
+                <th scope="col">Trạng thái PR</th>
+            </tr>
+        </thead>
+        <tbody class="table-body">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">1</th>
+                    <td>@item.Id</td>
+                    <td>@item.CreatedAt.ToString("dd/MM/yyyy")</td>
+                    <td>@item.StaffId</td>
+                    <td>@item.RequestDate.ToString("dd/MM/yyyy")</td>
+                    <td class="text-left">@item.ProjectName</td>
+                    <td>@item.status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
